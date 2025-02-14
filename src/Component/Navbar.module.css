@@ -1,0 +1,45 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+.container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height:50px;
+    padding:15px;
+}
+.AppName{
+    margin-left: 25px;
+    font-size: 25px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(54, 34, 73);
+}
+.active{
+    color: rgb(253, 121, 14);
+}
+.menuContainer{
+    display: flex;
+    margin-right: 60px;
+    justify-content: space-between;
+    width:550px;
+}
+.menuContainer a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-decoration: none;
+}
+.menuContainer img{
+    width:30px;
+    height:30px;
+}
+.bodyContainer{
+   box-shadow: inset 0px 15px 15px 5px rgb(245, 244, 244);
+    height:80vh;
+    backdrop-filter: 15px;
+    background-color: rgba(220, 220, 220, 0.151);
+}
