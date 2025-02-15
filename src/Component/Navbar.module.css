@@ -22,16 +22,16 @@ body{
     display: flex;
     margin-right: 60px;
     justify-content: space-between;
-    width:550px;
 }
 .menuContainer a{
     display: flex;
-    justify-content: center;
+    justify-content:space-between;
     align-items: center;
     font-size: 20px;
     font-weight: 700;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-decoration: none;
+    margin-left:50px;
 }
 .menuContainer img{
     width:30px;
@@ -39,7 +39,7 @@ body{
 }
 .bodyContainer{
    box-shadow: inset 0px 15px 15px 5px rgb(245, 244, 244);
-    height:80vh;
+    height:86.8vh;
     backdrop-filter: 15px;
     background-color: rgba(220, 220, 220, 0.151);
 }

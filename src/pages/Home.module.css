@@ -74,6 +74,12 @@
     width:80%;
     height:480px;
 }
+.spinner{
+    display: flex;
+    justify-content: center;
+    width:300%;
+    height: 60px;
+}
 .Card{
     display: flex;
     flex-direction: column;
