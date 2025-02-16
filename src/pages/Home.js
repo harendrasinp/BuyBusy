@@ -17,8 +17,8 @@ export const Home = () => {
             const data = await getDocs(collection(db, "products"));
             const fetchdata = data.docs.map((item) => {
                 return {
-                    id: item.id,
-                    data: item.data()
+                    ...item.data(),
+                    id:item.id
                 }
             });
             setLoadingStatus(false)
@@ -32,7 +32,7 @@ export const Home = () => {
             setLoadFetchedData(alldata);
         }
         else {
-            const fetchDt = alldata.filter((product) => product.data.title.toLowerCase().includes(fetchData.toLowerCase()));
+            const fetchDt = alldata.filter((product) => product.title.toLowerCase().includes(fetchData.toLowerCase()));
             setLoadFetchedData(fetchDt)
         }
     }, [fetchData, alldata]);
@@ -41,7 +41,7 @@ export const Home = () => {
             return
         }
         else {
-            const filterP = alldata.filter((product) => product.data.price <= filterPrice)
+            const filterP = alldata.filter((product) => product.price <= filterPrice)
             setLoadFetchedData(filterP);
         }
     }, [filterPrice, alldata])
@@ -76,11 +76,11 @@ export const Home = () => {
             </div>
             <div className={homeStyle.productContainer}>
                 {lodingstatus ? <div className={homeStyle.spinner}><GridLoader loading={lodingstatus} color="#0b2b40" /></div>
-                    : loadFechedData.map((product) => (
-                        <div key={product.id} className={homeStyle.Card}>
-                            <img src={product.data.image} alt='images' />
-                            <div className={homeStyle.productName}>{strimTitle(product.data.title)}</div>
-                            <div className={homeStyle.productPrice}>&#8377;{product.data.price}</div>
+                    : loadFechedData.map((product,index) => (
+                        <div key={index} className={homeStyle.Card}>
+                            <img src={product.image} alt='images' />
+                            <div className={homeStyle.productName}>{strimTitle(product.title)}</div>
+                            <div className={homeStyle.productPrice}>&#8377;{product.price}</div>
                             <div className={homeStyle.submitBtnDiv}>
                                 <button type='submit'onClick={()=>addtoCart(product)}>Add To Cart</button>
                             </div>

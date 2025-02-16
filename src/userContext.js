@@ -2,7 +2,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import React, { useContext, useEffect, useState } from 'react'
 import { createContext } from 'react'
 import { auth, db } from './firebase/firebaseInit';
-import { collection, doc, getDoc, onSnapshot, setDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, setDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 //----------------------creat Context for user------------------------
 const userContext = createContext();
@@ -45,8 +45,10 @@ const UserContextProvider = ({ children }) => {
                 setUserCart(cart)
             });
         }
-    },[userData]);
+    }, [userData]);
     //---------------------------------function-------------------------------------------------
+    // ...
+
     const addtoCart = async (cartData) => {
         try {
             const cartItemRef = doc(db, "users", userData.uid, "cart", cartData.id);
@@ -54,31 +56,48 @@ const UserContextProvider = ({ children }) => {
             if (data) {
                 const upateQty = data.qty + 1;
                 await setDoc(cartItemRef, {
-                    title: cartData.data.title,
-                    price: cartData.data.price,
-                    image: cartData.data.image,
+                    title: cartData.title,
+                    price: cartData.price,
+                    image: cartData.image,
                     qty: upateQty
 
                 }, { merge: true });
                 toast.success("added successfully!");
             } else {
                 await setDoc(cartItemRef, {
-                    title: cartData.data.title,
-                    price: cartData.data.price,
-                    image: cartData.data.image,
+                    title: cartData.title,
+                    price: cartData.price,
+                    image: cartData.image,
                     qty: 1
                 });
                 toast.success("added successfully!");
             }
-
         } catch (error) {
             console.error("Error adding cart item: ", error);
         }
-
     }
-    console.log(userCart)
+    const deductCart = async (addedCart) => {
+        const docReff = doc(db, "users", userData.uid, "cart", addedCart.id);
+        const cartdata = await getDoc(docReff);
+        const data = cartdata.data();
+        if (data.qty > 0) {
+            const updateqty = data.qty - 1;
+            await setDoc(docReff, {
+                qty: updateqty
+            }, { merge: true })
+            toast.info("Cart Deducted !!!");
+        }else{
+            await deleteDoc(docReff);
+        }
+    }
+    const removeCart=async(cart)=>{
+        const docReff = doc(db, "users", userData.uid, "cart", cart.id);
+        await deleteDoc(docReff);
+        toast.info("Cart Deleted !!!");
+    }
+    // ------------------------------Return------------------------------------------------
     return (
-        <userContext.Provider value={{ loadFechedData, setLoadFetchedData, userData, addtoCart, userCart }}>
+        <userContext.Provider value={{ loadFechedData, setLoadFetchedData, userData, addtoCart, userCart, deductCart,removeCart}}>
             {children}
         </userContext.Provider>
     )
