@@ -3,10 +3,11 @@ import homeStyle from "./Home.module.css"
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/firebaseInit';
 import { GridLoader } from 'react-spinners';
+import { useUserContext } from '../userContext';
 export const Home = () => {
+    const {addtoCart,loadFechedData,setLoadFetchedData}=useUserContext()
     const [alldata, setAllData] = useState([]);
     const [fetchData, setFetchedData] = useState("");
-    const [loadFechedData, setLoadFetchedData] = useState([]);
     const [filterPrice, setFilterPrice] = useState(0);
     const [lodingstatus, setLoadingStatus] = useState(true)
     // -----------------------Hooks-----------------------------
@@ -81,7 +82,7 @@ export const Home = () => {
                             <div className={homeStyle.productName}>{strimTitle(product.data.title)}</div>
                             <div className={homeStyle.productPrice}>&#8377;{product.data.price}</div>
                             <div className={homeStyle.submitBtnDiv}>
-                                <button type='submit'>Add To Cart</button>
+                                <button type='submit'onClick={()=>addtoCart(product)}>Add To Cart</button>
                             </div>
                         </div>
                     ))

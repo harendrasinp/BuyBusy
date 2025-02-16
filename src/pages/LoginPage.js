@@ -6,7 +6,7 @@ import { auth } from '../firebase/firebaseInit';
 import { toast } from 'react-toastify';
 
 
-export const Login = ({ setIsLoggedIn }) => {
+export const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,6 +18,7 @@ export const Login = ({ setIsLoggedIn }) => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       navigate("/");
       // setIsLoggedIn(true);
+      console.log(userCredential)
     } catch {
       setEmail("");
       setPassword("");
