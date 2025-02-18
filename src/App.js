@@ -7,10 +7,9 @@ import { Orders } from './pages/Orders';
 import { Cart } from './pages/Cart';
 import { Login } from './pages/LoginPage';
 import { Signup } from './pages/Signup';
-import { useState } from 'react';
 import { ProtectedRout } from './Component/Protected';
 function App() {
- const[isLoggedIn,setIsLoggedIn]=useState(false)
+
   const router = createBrowserRouter([
     {
       path: "/", element: <Navbar />,
@@ -21,7 +20,7 @@ function App() {
         {
           path: "Login",
           children: [
-            { index: true, element: <Login setIsLoggedIn={setIsLoggedIn} /> },
+            { index: true, element: <Login/> },
             { path: "signup", element: <Signup /> }
           ]
         },

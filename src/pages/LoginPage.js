@@ -17,7 +17,6 @@ export const Login = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       navigate("/");
-      // setIsLoggedIn(true);
       console.log(userCredential)
       toast.success("Loging Successfull !!!")
     } catch {
