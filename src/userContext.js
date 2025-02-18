@@ -21,9 +21,10 @@ const UserContextProvider = ({ children }) => {
     const [userCart, setUserCart] = useState([]);
     const [totalprice, setTotalPrice] = useState(0);
     const [orderbill, setOrderbill] = useState([]);
-   
+    const [isLoadingUser, setIsLoadingUser] = useState(true);
     // ---------------------hooks------------------------------------
     useEffect(() => {
+        setIsLoadingUser(true);
         const unsuscrib = onAuthStateChanged(auth, (currentUser) => {
             if (currentUser) {
                 setUserData(currentUser); 
@@ -31,6 +32,7 @@ const UserContextProvider = ({ children }) => {
             else {
                 setUserData(null)
             }
+            setIsLoadingUser(false)
         })
         return () => {
             unsuscrib();
@@ -141,7 +143,8 @@ const UserContextProvider = ({ children }) => {
             totalprice,
             setTotalPrice,
             purchase,
-            orderbill
+            orderbill,
+            isLoadingUser,
         }}>
             {children}
         </userContext.Provider>

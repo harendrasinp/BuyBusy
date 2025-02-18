@@ -20,11 +20,11 @@ export const Orders = () => {
   return (
     <div className={orderStyle.container}>
       <div className={orderStyle.tableDiv}>
+      <div className={orderStyle.yourOrderTitle}>Your Orders</div>
         {orderbill.map((bill) => (
           <table className={orderStyle.table}>
             <div>
-              <div className={orderStyle.orderTitleDiv}>
-                <div className={orderStyle.yourOrderTitle}>Your Orders</div>
+              <div className={orderStyle.orderTitleDiv}>   
                 <div className={orderStyle.date}>Order On: {formatDate(bill.createdAt)}</div>
               </div>
               {/* -----------------table heading------------------------------------------- */}

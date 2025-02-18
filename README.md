@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+Filtering Products
+Search:
+Type in the search bar to filter products by matching text in the product title or category.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Price:
+Use the range slider to set a maximum price filter. Only products with a price below or equal to this value will be displayed.
 
-## Available Scripts
+Category:
+Use the checkboxes to select one or more categories. The product list updates dynamically based on the selected categories.
 
-In the project directory, you can run:
+Adding Products to Cart
+Click the "Add To Cart" button on any product card to add that product to your cart.
+Cart management functions are handled via Firebase, ensuring data consistency across user sessions.
+Customization
+Styling:
+Modify Home.module.css for custom styles.
 
-### `npm start`
+Firebase Collections:
+Change the Firestore collection names or structure if needed in both Home.js and userContext.js.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Cart Component
+This is a React component that displays the shopping cart for an e-commerce application. The component integrates with a user context for managing cart data and total price calculation. It also provides functionality for modifying cart items (adding, deducting, and removing) and initiating the purchase process, which then navigates the user to an Orders page.
 
-### `npm test`
+Features
+Display Cart Items:
+Renders a list of products added to the cart along with images, titles, prices, and quantities.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Cart Management:
 
-### `npm run build`
+Add to Cart: Increase the quantity of a product in the cart.
+Deduct from Cart: Decrease the quantity of a product.
+Remove from Cart: Remove a product from the cart completely.
+Price Calculation:
+Dynamically calculates the total price based on the products and their quantities.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Purchase Flow:
+A "Purchase" button triggers the purchase action and navigates the user to the Orders page.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Technologies Used
+React: For building the UI.
+React Router DOM: For navigation (useNavigate hook).
+CSS Modules: Scoped styling using Cart.module.css.
+Context API: Consuming user and cart data via a custom context (useUserContext).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Firebase Setup:
 
-### `npm run eject`
+The project uses Firebase for data storage and authentication. Ensure you have configured Firebase correctly in your project. Your Firebase initialization should be in a file like firebase/firebaseInit.js.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Usage
+Cart Operations
+Viewing Cart Items:
+The Cart component renders all items added to the cart. Each cart item displays an image, product title, individual price, and quantity.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Modifying Quantities:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Click the "+" icon to increase the product quantity.
+Click the "-" icon to decrease the product quantity.
+Removing Items:
+Click the "Remove from Cart" button to completely remove an item from the cart.
 
-## Learn More
+Purchasing Items:
+The "Purchase" button calculates the total price and triggers the purchase function. Once completed, it navigates the user to the Orders page.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Code Overview
+State Management:
+Uses context (useUserContext) to access and update the cart state, total price, and purchase function.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Price Calculation:
+Utilizes the useEffect hook to calculate the total price whenever the userCart state changes.
 
-### Code Splitting
+Navigation:
+Uses useNavigate from react-router-dom to redirect the user after a successful purchase.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Customization
+Styling:
+Modify the styles in Cart.module.css to suit your design preferences.
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Context Functions:
+The functions (addtoCart, deductCart, removeCart, purchase, etc.) are defined in the user context (userContext.js). Update them as needed for your application requirements.
