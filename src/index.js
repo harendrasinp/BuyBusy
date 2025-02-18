@@ -6,7 +6,7 @@ import { ToastContainer,Bounce} from 'react-toastify';
 import UserContextProvider from './userContext';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <>
     <UserContextProvider>
         <App/>
     </UserContextProvider>
@@ -23,7 +23,7 @@ root.render(
       theme="dark"
       transition={Bounce}
     />
-  </React.StrictMode>
+  </>
 );
 
 
