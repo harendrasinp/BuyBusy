@@ -4,6 +4,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/firebaseInit';
 import { GridLoader } from 'react-spinners';
 import { useUserContext } from '../userContext';
+import { toast } from 'react-toastify';
 export const Home = () => {
     const {addtoCart,loadFechedData,setLoadFetchedData}=useUserContext()
     const [alldata, setAllData] = useState([]);
@@ -23,10 +24,10 @@ export const Home = () => {
             });
             setLoadingStatus(false)
             setAllData(fetchdata);
-            setLoadFetchedData(fetchdata);
-        };
-        fetchData();
-    }, []);
+            setLoadFetchedData(fetchdata)
+    };
+    fetchData();
+    },[]);
     useEffect(() => {
         if (fetchData === "") {
             setLoadFetchedData(alldata);
@@ -35,7 +36,7 @@ export const Home = () => {
             const fetchDt = alldata.filter((product) => product.title.toLowerCase().includes(fetchData.toLowerCase()));
             setLoadFetchedData(fetchDt)
         }
-    }, [fetchData, alldata]);
+    },[fetchData,alldata]);
     useEffect(() => {
         if (filterPrice === 0) {
             return
@@ -64,7 +65,7 @@ export const Home = () => {
                     </div>
                     <div className={homeStyle.titleCategory}>Category</div>
                     <div className={homeStyle.productSelection}>
-                        <div><input type='checkbox' />Man's Clothes</div>
+                        <div><input type='checkbox'  />Man's Clothes</div>
                         <div><input type='checkbox' />Womens's Clothes</div>
                         <div><input type='checkbox' />Jwellary</div>
                         <div><input type='checkbox' />Electronics</div>

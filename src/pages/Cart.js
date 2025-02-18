@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import cartStyle from "./Cart.module.css"
 import { useUserContext } from '../userContext'
+import { addDoc, collection, onSnapshot } from 'firebase/firestore';
+import { toast } from 'react-toastify';
+import { db } from '../firebase/firebaseInit';
+
 export const Cart = () => {
-  const { userCart,addtoCart,deductCart,removeCart } = useUserContext();
-  const[totalprice,setTotalPrice]=useState(0);
+  const {userData, userCart,addtoCart,deductCart,removeCart,totalprice,setTotalPrice,purchase} = useUserContext();
 
   useEffect(()=>{
      if(userCart && userCart.length>0){
        const updatePrice=userCart.reduce((acc,item)=>acc+(item.price*item.qty),0)
-       console.log(updatePrice)
        setTotalPrice(updatePrice)
      }
      else{
       setTotalPrice(0)
      }
-     
   },[userCart])
-  // ---------------------------------Return-------------------------------
+  // --------------------------------functions-------------------------------------
+  // ---------------------------------Return---------------------------------------
   return (
     <div className={cartStyle.container}>
       <div className={cartStyle.calculateBox}>
         <div className={cartStyle.calculateitems}>
           <div className={cartStyle.priceTag}>TotalPrice: &#8377;{totalprice} /-</div>
-          <button>Purchase</button>
+          <button onClick={purchase}>Purchase</button>
         </div>
       </div>
       <div className={cartStyle.cardContainer}>

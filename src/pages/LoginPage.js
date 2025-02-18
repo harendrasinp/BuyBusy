@@ -19,6 +19,7 @@ export const Login = () => {
       navigate("/");
       // setIsLoggedIn(true);
       console.log(userCredential)
+      toast.success("Loging Successfull !!!")
     } catch {
       setEmail("");
       setPassword("");

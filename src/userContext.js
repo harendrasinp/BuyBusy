@@ -2,8 +2,10 @@ import { onAuthStateChanged } from 'firebase/auth';
 import React, { useContext, useEffect, useState } from 'react'
 import { createContext } from 'react'
 import { auth, db } from './firebase/firebaseInit';
-import { collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, setDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, setDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
+
+
 //----------------------creat Context for user------------------------
 const userContext = createContext();
 
@@ -17,11 +19,14 @@ const UserContextProvider = ({ children }) => {
     const [loadFechedData, setLoadFetchedData] = useState([]);
     const [userData, setUserData] = useState(null);
     const [userCart, setUserCart] = useState([]);
+    const [totalprice, setTotalPrice] = useState(0);
+    const [orderbill, setOrderbill] = useState([]);
+   
     // ---------------------hooks------------------------------------
     useEffect(() => {
         const unsuscrib = onAuthStateChanged(auth, (currentUser) => {
             if (currentUser) {
-                setUserData(currentUser);
+                setUserData(currentUser); 
             }
             else {
                 setUserData(null)
@@ -46,9 +51,24 @@ const UserContextProvider = ({ children }) => {
             });
         }
     }, [userData]);
-    //---------------------------------function-------------------------------------------------
-    // ...
 
+    useEffect(()=>{
+        if(userData){
+            const billreff=collection(db,"users",userData.uid,"Bill");
+            onSnapshot(billreff,(onSnap)=>{
+                const bills=onSnap.docs.map((bill)=>{
+                    return{
+                        ...bill.data(),
+                        id:bill.id
+                    }
+                });
+                setOrderbill(bills);
+            })
+        }
+    },[userData])
+    //---------------------------------function-------------------------------------------------
+
+    // ------------------------------add Cart function------------------------------------
     const addtoCart = async (cartData) => {
         try {
             const cartItemRef = doc(db, "users", userData.uid, "cart", cartData.id);
@@ -76,6 +96,7 @@ const UserContextProvider = ({ children }) => {
             console.error("Error adding cart item: ", error);
         }
     }
+    //-----------------------------------------deduct Cart function-------------------------------
     const deductCart = async (addedCart) => {
         const docReff = doc(db, "users", userData.uid, "cart", addedCart.id);
         const cartdata = await getDoc(docReff);
@@ -86,18 +107,42 @@ const UserContextProvider = ({ children }) => {
                 qty: updateqty
             }, { merge: true })
             toast.info("Cart Deducted !!!");
-        }else{
+        } else {
             await deleteDoc(docReff);
         }
     }
-    const removeCart=async(cart)=>{
+    // ----------------------------------Remove Function---------------------------------------------------
+    const removeCart = async (cart) => {
         const docReff = doc(db, "users", userData.uid, "cart", cart.id);
         await deleteDoc(docReff);
         toast.info("Cart Deleted !!!");
     }
+
+    const purchase = async () => {
+        const orderRef = collection(db, "users", userData.uid, "Bill",);
+        // const billdata=await getDoc(orderRef);
+        await addDoc(orderRef, {
+            product: userCart,
+            total: totalprice,
+            createdAt: new Date()
+        });
+        toast.info("bill Generated !!!");
+    }
     // ------------------------------Return------------------------------------------------
     return (
-        <userContext.Provider value={{ loadFechedData, setLoadFetchedData, userData, addtoCart, userCart, deductCart,removeCart}}>
+        <userContext.Provider value={{
+            loadFechedData,
+            setLoadFetchedData,
+            userData,
+            addtoCart,
+            userCart,
+            deductCart,
+            removeCart,
+            totalprice,
+            setTotalPrice,
+            purchase,
+            orderbill
+        }}>
             {children}
         </userContext.Provider>
     )

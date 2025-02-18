@@ -6,7 +6,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height:50px;
+    height:70px;
     padding:15px;
 }
 .AppName{
@@ -38,8 +38,6 @@ body{
     height:30px;
 }
 .bodyContainer{
-   box-shadow: inset 0px 15px 15px 5px rgb(245, 244, 244);
-    height:86.8vh;
     backdrop-filter: 15px;
     background-color: rgba(220, 220, 220, 0.151);
 }

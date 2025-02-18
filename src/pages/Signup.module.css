@@ -1,5 +1,5 @@
 .container{
-    height:526px;
+    height:535px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,6 +15,7 @@
     color: rgb(43, 43, 71);
 }
 .loginBox{
+    margin-top: -100px;
     display: flex;
     flex-direction: column;
     width:350px;
@@ -27,7 +28,7 @@
     flex-direction: column;
 }
 .loginForm input{
-    width:250px;
+    width:272px;
     font-size: 20px;
     margin-top: 10px;
     padding:10px;

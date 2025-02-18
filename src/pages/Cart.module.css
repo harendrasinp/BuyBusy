@@ -47,7 +47,7 @@
     flex-direction: column;
     padding:15px;
     width:230px;
-    height:360px;
+    height:412px;
     border-radius:10px;
     box-shadow: 0px 0px 8px 5px gainsboro;
 }
@@ -91,14 +91,14 @@
 }
 .submitBtnDiv{
     margin-top:10%;
-    height:60px;
+    height:50px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .submitBtnDiv button{
     width: 250px;
-    padding: 10px;
+    padding:5px;
     border-radius:6px;
     border: 0px;
     font-size: 20px;
