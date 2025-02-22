@@ -1,6 +1,4 @@
-/* .countainer{
-    
-} */
+
  .searchBox{
     display: flex;
     justify-content: center;
@@ -123,4 +121,62 @@
     color: white;
     cursor: pointer;
     background-color: rgb(84, 84, 216);
+}
+
+/* ----------------------------media Query------------------------------ */
+
+@media(max-width:550px){
+    .filterDiv{
+        display: none;
+    }
+    .productContainer{
+        display: grid;
+        grid-template-columns:repeat(4,1fr);
+        gap:10px;
+        justify-content: center;
+        align-items: center;
+        height:480px;
+        margin-left: -215px;
+    }
+    .spinner{
+        display: flex;
+        justify-content: center;
+        width:300%;
+        height: 60px;
+        margin-left:30px;
+    }
+    .Card{
+        width:80px;
+        height:130px;
+    }
+    .productName{
+        width:60px;
+        display: flex;
+        align-items: start;
+        font-size:5px;
+        font-weight: 700;
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+    .productPrice{
+        width: 100%;
+        font-weight: 700;
+        font-size:5px;
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+    .submitBtnDiv{
+        height:20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .submitBtnDiv button{
+        width:60px;
+        padding:2px;
+        border-radius:1px;
+        border: 0px;
+        font-size:5px;
+        color: white;
+        cursor: pointer;
+        background-color: rgb(84, 84, 216);
+    }
 }

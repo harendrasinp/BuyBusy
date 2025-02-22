@@ -55,7 +55,6 @@ export const Home = () => {
     // -------------------------return------------------------------------------
     return (
         <div className={homeStyle.countainer}>
-
             <div className={homeStyle.filterDiv}>
                 <div className={homeStyle.fitlerContainer}>
                     <div className={homeStyle.filterTitle}>Filter</div>
