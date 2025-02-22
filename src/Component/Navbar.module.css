@@ -43,7 +43,7 @@ body{
 }
 
 /*--------------------------------media query----------------------------------------- */
-@media(max-width:550px){
+@media(max-width:480px){
     .container{
         width:250px;
         display: flex;
@@ -53,13 +53,13 @@ body{
         padding:15px;
     }
     .AppName{
-        margin-left: 25px;
+        margin-left:7px;
         font-size: 20px;
     }
     .menuContainer{
-        width: 250px;
+        width:180px;
         display: flex;
-        margin-right:80px;
+        margin-right:75px;
         justify-content: space-between;
     }
     .menuContainer a{
@@ -70,7 +70,7 @@ body{
         font-weight: 700;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         text-decoration: none;
-        margin-left:50px;
+        margin-left:27px;
     }
     .menuContainer img{
         width:18px;
